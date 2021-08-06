@@ -64,7 +64,6 @@ public class SFTP {
         deinit {
             libssh2_sftp_close_handle(sftpHandle)
         }
-        
     }
     
     private let cSession: OpaquePointer
@@ -284,7 +283,10 @@ public class SFTP {
     
     
     deinit {
+//        libssh2_sftp_shutdown(sftpSession)
+    }
+
+    public func shutdown() {
         libssh2_sftp_shutdown(sftpSession)
     }
-    
 }

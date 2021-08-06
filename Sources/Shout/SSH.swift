@@ -37,6 +37,7 @@ public class SSH {
     
     let session: Session
     private let sock: Socket
+    weak var channel: Channel?
     
     public var ptyType: PtyType? = nil
     
@@ -220,7 +221,11 @@ public class SSH {
         
         return channel.exitStatus()
     }
-    
+
+    public func terminate() throws {
+        try channel?.close()
+    }
+
     /// Open an SFTP session with the remote server
     ///
     /// - Returns: the opened SFTP session
